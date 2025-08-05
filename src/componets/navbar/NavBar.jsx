@@ -31,7 +31,7 @@ function NavBar() {
         <ScrollContainer>
           <NavItem to="/admin" label="Painel Admin" />
           <NavItem to="/instituicoes" label="Instituições" />
-          <NavItem to="/coordenadores" label="Coordenadores" />
+          <NavItem to="/professores/coordenadores" label="Coordenadores" />
           <NavItem to="/alunos" label="Alunos" />
           <NavItem to="/disciplinas" label="Disciplinas" />
           <NavItem to="/cursos" label="Cursos" />

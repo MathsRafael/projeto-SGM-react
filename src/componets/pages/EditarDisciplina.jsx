@@ -1,9 +1,21 @@
+import { useEffect, useState } from "react";
+// GARANTA QUE 'useParams' ESTÁ SENDO IMPORTADO AQUI
+import { useNavigate, useParams } from "react-router-dom";
+import api from "../services/api";
+import Button from "../form/Button";
+import Campo from "../form/Campo";
+
 export default function EditarDisciplina() {
   const { id } = useParams();
   const navigate = useNavigate();
+
   const [form, setForm] = useState({
-    /* ... */
+    nome: "",
+    cargaHoraria: "",
+    professorId: "",
+    cursoId: "",
   });
+
   const [professores, setProfessores] = useState([]);
   const [cursos, setCursos] = useState([]);
   const [erros, setErros] = useState({});
@@ -17,6 +29,19 @@ export default function EditarDisciplina() {
           api.get("/professores"),
           api.get("/cursos"),
         ]);
+
+        const disciplina = respDisc.data;
+        setForm({
+          nome: disciplina.nome || "",
+          cargaHoraria: disciplina.cargaHoraria || "",
+          // O nome do DTO de professor que o backend envia
+          professorId: disciplina.professorResponseDTO?.id || "",
+          // O nome do DTO de curso que o backend envia
+          cursoId: disciplina.cursoResponseDTO?.id || "",
+        });
+
+        setProfessores(respProf.data);
+        setCursos(respCursos.data);
       } catch (error) {
         console.error("Erro ao carregar dados:", error);
         setErros({ geral: "Erro ao carregar dados da disciplina." });

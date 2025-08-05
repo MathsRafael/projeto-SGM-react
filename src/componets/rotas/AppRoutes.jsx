@@ -5,11 +5,11 @@ import Professor from "../pages/Professor";
 import Coordenador from "../pages/Coordenador";
 import Monitor from "../pages/Monitor";
 import Admin from "../pages/Admin";
-import CadastrarAluno from "../pages/CadastroAluno";
+import CadastrarAluno from "../pages/NovoAluno.jsx";
 import SenhaEsquecida from "../pages/SenhaEsquecida";
 import RotaProtegida from "./RotaProtegida";
 import Cabeca from "../layout/Conteiner";
-import Perfil from "../pages/Perfil";
+
 import Editais from "../pages/Editais";
 import Monitorias from "../pages/Monitorias";
 import Alunos from "../pages/Alunos";
@@ -27,6 +27,7 @@ import Cursos from "../pages/Cursos.jsx";
 import NovoCurso from "../pages/NovoCurso.jsx";
 import EditarCurso from "../pages/EditarCurso.jsx";
 
+import EditarAluno from "../pages/EditarAluno.jsx";
 function AppRoutes() {
   const location = useLocation();
 
@@ -67,35 +68,19 @@ function AppRoutes() {
         />
 
         <Route
-          path="/aluno/:id"
+          path="/alunos"
           element={
-            <RotaProtegida
-              perfilPermitido={[
-                "professor",
-                "coordenador",
-                "aluno",
-                "monitor",
-                "admin",
-              ]}
-            >
-              <Aluno />
+            <RotaProtegida perfilPermitido={["coordenador", "admin"]}>
+              <Alunos />
             </RotaProtegida>
           }
         />
 
         <Route
-          path="/perfil/:id"
+          path="/alunos/editar/:id"
           element={
-            <RotaProtegida
-              perfilPermitido={[
-                "professor",
-                "coordenador",
-                "aluno",
-                "monitor",
-                "admin",
-              ]}
-            >
-              <Perfil />
+            <RotaProtegida perfilPermitido={["coordenador", "admin"]}>
+              <EditarAluno />
             </RotaProtegida>
           }
         />
@@ -130,15 +115,6 @@ function AppRoutes() {
               ]}
             >
               <Monitorias />
-            </RotaProtegida>
-          }
-        />
-
-        <Route
-          path="/alunos"
-          element={
-            <RotaProtegida perfilPermitido={["coordenador", "admin"]}>
-              <Alunos />
             </RotaProtegida>
           }
         />
@@ -183,7 +159,7 @@ function AppRoutes() {
 
         {}
         <Route
-          path="/coordenadores"
+          path="/professores/coordenadores"
           element={
             <RotaProtegida perfilPermitido="admin">
               <Coordenadores />

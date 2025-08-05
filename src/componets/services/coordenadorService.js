@@ -1,6 +1,6 @@
 import api from "./api";
 
-const API_URL = "/coordenadores";
+const API_URL = "/professores/coordenadores";
 
 export const getCoordenadores = () => {
   return api.get(API_URL);
