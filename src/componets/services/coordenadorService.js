@@ -1,25 +1,29 @@
 import api from "./api";
 
-const API_URL = "/professores/coordenadores";
-
+const COORDENADORES_URL = "/professores/coordenadores";
+const PROFESSORES_URL = "/professores";
 export const getCoordenadores = () => {
-  return api.get(API_URL);
+  return api.get(COORDENADORES_URL);
 };
 
-export const createCoordenador = (coordenadorData) => {
-  return api.post(API_URL, coordenadorData);
+export const promoteProfessor = (professorId, cursoId) => {
+  return api.put(`${PROFESSORES_URL}/${professorId}/coordenador/${cursoId}`);
+};
+
+export const updateCoordenador = (id, professorData) => {
+  return api.put(`${PROFESSORES_URL}/${id}`, professorData);
+};
+
+export const removeCoordenadorRole = (id) => {
+  return api.delete(`${PROFESSORES_URL}/${id}/coordenador`);
 };
 
 export const getCoordenadorById = (id) => {
-  return api.get(`${API_URL}/${id}`);
+  return api.get(`${PROFESSORES_URL}/${id}`);
 };
 
-export const updateCoordenador = (id, coordenadorData) => {
-  return api.put(`${API_URL}/${id}`, coordenadorData);
-};
-
-export const deleteCoordenador = (id) => {
-  return api.delete(`${API_URL}/${id}`);
+export const getProfessores = () => {
+  return api.get(PROFESSORES_URL);
 };
 
 export const getCursos = () => {

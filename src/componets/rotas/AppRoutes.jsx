@@ -22,7 +22,6 @@ import EditarDisciplina from "../pages/EditarDisciplina";
 
 import Coordenadores from "../pages/Coordenadores.jsx";
 import NovoCoordenador from "../pages/NovoCoordenador.jsx";
-import EditarCoordenador from "../pages/EditarCoordenador.jsx";
 import Cursos from "../pages/Cursos.jsx";
 import NovoCurso from "../pages/NovoCurso.jsx";
 import EditarCurso from "../pages/EditarCurso.jsx";
@@ -43,32 +42,6 @@ function AppRoutes() {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/senhaEsquecida" element={<SenhaEsquecida />} />
-
-        <Route
-          path="/coordenadores"
-          element={
-            <RotaProtegida perfilPermitido="admin">
-              <Coordenadores />
-            </RotaProtegida>
-          }
-        />
-        <Route
-          path="/coordenadores/novo"
-          element={
-            <RotaProtegida perfilPermitido="admin">
-              <NovoCoordenador />
-            </RotaProtegida>
-          }
-        />
-        {}
-        <Route
-          path="/coordenadores/editar/:id"
-          element={
-            <RotaProtegida perfilPermitido="admin">
-              <EditarCoordenador />
-            </RotaProtegida>
-          }
-        />
 
         <Route
           path="/alunos"
@@ -187,7 +160,7 @@ function AppRoutes() {
           }
         />
         <Route
-          path="/coordenadores/novo"
+          path="/professores/coordenadores/novo"
           element={
             <RotaProtegida perfilPermitido="admin">
               <NovoCoordenador />
