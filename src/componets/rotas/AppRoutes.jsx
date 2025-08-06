@@ -28,6 +28,9 @@ import NovoCurso from "../pages/NovoCurso.jsx";
 import EditarCurso from "../pages/EditarCurso.jsx";
 
 import EditarAluno from "../pages/EditarAluno.jsx";
+
+import Professores from "../pages/Professores.jsx";
+import EditarProfessor from "../pages/EditarProfessor.jsx";
 function AppRoutes() {
   const location = useLocation();
 
@@ -124,6 +127,23 @@ function AppRoutes() {
           element={
             <RotaProtegida perfilPermitido={["professor", "coordenador"]}>
               <Professor />
+            </RotaProtegida>
+          }
+        />
+
+        <Route
+          path="/professores"
+          element={
+            <RotaProtegida perfilPermitido={["admin"]}>
+              <Professores />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/professores/editar/:id"
+          element={
+            <RotaProtegida perfilPermitido={["admin"]}>
+              <EditarProfessor />
             </RotaProtegida>
           }
         />
