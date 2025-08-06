@@ -63,6 +63,10 @@ export default function Alunos() {
                 Matrícula
               </th>
               <th className="p-3 border-b border-gray-300 text-left">Email</th>
+              <th className="p-3 border-b border-gray-300 text-left">
+                Email Acadêmico
+              </th>
+
               <th className="p-3 border-b border-gray-300 text-center">
                 Ações
               </th>
@@ -76,6 +80,10 @@ export default function Alunos() {
                   {aluno.matricula}
                 </td>
                 <td className="p-3 border-b border-gray-300">{aluno.email}</td>
+                <td className="p-3 border-b border-gray-300">
+                  {aluno.emailAcademico || "N/A"}
+                </td>
+
                 <td className="p-3 border-b border-gray-300 text-center space-x-2">
                   <Button
                     onClick={() => navigate(`/alunos/editar/${aluno.id}`)}

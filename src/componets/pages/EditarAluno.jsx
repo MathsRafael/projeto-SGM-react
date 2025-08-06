@@ -12,26 +12,23 @@ export default function EditarAluno() {
     nome: "",
     email: "",
     emailAcademico: "",
-    instituicaoId: "",
+    matricula: "",
   });
   const [instituicoes, setInstituicoes] = useState([]);
   const [erro, setErro] = useState(null);
   const [carregando, setCarregando] = useState(true);
 
   useEffect(() => {
-    Promise.all([
-      alunoService.getAlunoById(id),
-      instituicaoService.getInstituicoes(),
-    ])
-      .then(([alunoResponse, instituicoesResponse]) => {
+    alunoService
+      .getAlunoById(id)
+      .then((alunoResponse) => {
         const aluno = alunoResponse.data;
         setForm({
           nome: aluno.nome || "",
           email: aluno.email || "",
           emailAcademico: aluno.emailAcademico || "",
-          instituicaoId: aluno.instituicaoResponseDTO?.id || "",
+          matricula: aluno.matricula || "",
         });
-        setInstituicoes(instituicoesResponse.data);
       })
       .catch((error) => {
         console.error("Erro ao carregar dados:", error);
@@ -97,25 +94,15 @@ export default function EditarAluno() {
           type="email"
           value={form.emailAcademico}
           onChange={handleChange}
+          required
         />
-
-        <div className="mb-4">
-          <label className="block mb-1 text-gray-600">Instituição</label>
-          <select
-            name="instituicaoId"
-            value={form.instituicaoId}
-            onChange={handleChange}
-            className="mt-0.5 mb-3 p-[8px] border-2 border-[#ccc] focus:border-primaria focus:outline-none rounded w-full"
-            required
-          >
-            <option value="">Selecione uma instituição</option>
-            {instituicoes.map((inst) => (
-              <option key={inst.id} value={inst.id}>
-                {inst.nome}
-              </option>
-            ))}
-          </select>
-        </div>
+        <Campo
+          label="Matrícula"
+          name="matricula"
+          value={form.matricula}
+          onChange={handleChange}
+          required
+        />
 
         <div className="flex justify-center gap-2 mt-4">
           <Button
