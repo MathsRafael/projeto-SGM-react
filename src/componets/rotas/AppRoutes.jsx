@@ -9,7 +9,6 @@ import CadastrarAluno from "../pages/NovoAluno.jsx";
 import SenhaEsquecida from "../pages/SenhaEsquecida";
 import RotaProtegida from "./RotaProtegida";
 import Cabeca from "../layout/Conteiner";
-
 import Editais from "../pages/Editais";
 import Monitorias from "../pages/Monitorias";
 import Alunos from "../pages/Alunos";
@@ -19,17 +18,20 @@ import EditarInstituicao from "../pages/EditarInstituicao";
 import Disciplinas from "../pages/Disciplinas";
 import NovaDisciplina from "../pages/NovaDisciplina";
 import EditarDisciplina from "../pages/EditarDisciplina";
-
 import Coordenadores from "../pages/Coordenadores.jsx";
 import NovoCoordenador from "../pages/NovoCoordenador.jsx";
 import Cursos from "../pages/Cursos.jsx";
 import NovoCurso from "../pages/NovoCurso.jsx";
 import EditarCurso from "../pages/EditarCurso.jsx";
-
 import EditarAluno from "../pages/EditarAluno.jsx";
-
 import Professores from "../pages/Professores.jsx";
 import EditarProfessor from "../pages/EditarProfessor.jsx";
+import ProcessosSeletivos from "../pages/ProcessosSeletivos.jsx";
+import NovoProcessoSeletivo from "../pages/NovoProcessoSeletivo.jsx";
+import EditarProcessoSeletivo from "../pages/EditarProcessoSeletivo.jsx";
+import NovaMonitoria from "../pages/NovaMonitoria.jsx";
+import EditarMonitoria from "../pages/EditarMonitoria.jsx";
+import VisualizarMonitoria from "../pages/VisualizarMonitoria.jsx";
 function AppRoutes() {
   const location = useLocation();
 
@@ -239,6 +241,62 @@ function AppRoutes() {
           element={
             <RotaProtegida perfilPermitido="admin">
               <EditarCurso />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/monitorias"
+          element={
+            <RotaProtegida perfilPermitido={["coordenador"]}>
+              <Monitorias />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/monitorias/novo"
+          element={
+            <RotaProtegida perfilPermitido={["coordenador"]}>
+              <NovaMonitoria />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/monitorias/editar/:id"
+          element={
+            <RotaProtegida perfilPermitido={["coordenador"]}>
+              <EditarMonitoria />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/monitorias/visualizar/:id"
+          element={
+            <RotaProtegida perfilPermitido={["coordenador"]}>
+              <VisualizarMonitoria />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/processos-seletivos"
+          element={
+            <RotaProtegida perfilPermitido={["coordenador"]}>
+              <ProcessosSeletivos />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/processos-seletivos/novo"
+          element={
+            <RotaProtegida perfilPermitido={["coordenador"]}>
+              <NovoProcessoSeletivo />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/processos-seletivos/editar/:id"
+          element={
+            <RotaProtegida perfilPermitido={["coordenador"]}>
+              <EditarProcessoSeletivo />
             </RotaProtegida>
           }
         />

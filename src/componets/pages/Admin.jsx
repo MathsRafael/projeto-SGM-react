@@ -1,7 +1,7 @@
 export default function admin() {
-  return(
+  return (
     <>
       <div> </div>
     </>
-  ) 
+  );
 }

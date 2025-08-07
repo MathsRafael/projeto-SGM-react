@@ -44,7 +44,8 @@ function NavBar() {
           <NavItem to="/coordenador" label="Coordenação" />
           <NavItem to="/alunos" label="Alunos" />
           <NavItem to="/disciplinas" label="Disciplinas" />
-          <NavItem to="/monitorias" label="Monitoria" />
+          <NavItem to="/monitorias" label="Monitorias" />
+          <NavItem to="/processos-seletivos" label="Editais" />
           <NavItem to="/professor" label="Painel Professor" />
         </ScrollContainer>
       )}
