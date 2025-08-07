@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import * as processoSeletivoService from "../services/processoSeletivoService";
+import * as instituicaoService from "../services/instituicaoService";
 import Button from "../form/Button.jsx";
 import Campo from "../form/Campo.jsx";
 
@@ -11,9 +12,17 @@ export default function NovoProcessoSeletivo() {
     descricao: "",
     dataInicioInscricoes: "",
     dataFimInscricoes: "",
+    instituicaoId: "",
   });
+  const [instituicoes, setInstituicoes] = useState([]);
   const [erro, setErro] = useState(null);
 
+  useEffect(() => {
+    instituicaoService
+      .getInstituicoes()
+      .then((res) => setInstituicoes(res.data))
+      .catch(() => setErro("Erro ao carregar instituições."));
+  }, []);
   const handleChange = (e) =>
     setForm({ ...form, [e.target.name]: e.target.value });
 
@@ -71,6 +80,23 @@ export default function NovoProcessoSeletivo() {
           onChange={handleChange}
           required
         />
+        <div className="mb-4">
+          <label className="block mb-1 text-gray-600">Instituição</label>
+          <select
+            name="instituicaoId"
+            value={form.instituicaoId}
+            onChange={handleChange}
+            className="mt-0.5 mb-3 p-[8px] border-2 border-[#ccc] w-full"
+            required
+          >
+            <option value="">Selecione uma instituição</option>
+            {instituicoes.map((inst) => (
+              <option key={inst.id} value={inst.id}>
+                {inst.nome}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <div className="flex justify-center gap-2 mt-4">
           <Button

@@ -28,7 +28,7 @@ export const AuthProvider = ({ children }) => {
   const navigate = useNavigate();
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
-  const [profile, setProfile] = useState(null);
+  const [profiles, setProfiles] = useState([]);
   const [loading, setLoading] = useState(true);
   const [authError, setAuthError] = useState(null);
 
@@ -49,7 +49,12 @@ export const AuthProvider = ({ children }) => {
         const parsedUser = JSON.parse(storedUser);
         setToken(storedToken);
         setUser(parsedUser);
-        setProfile(mapRoleToProfile(parsedUser.roles[0]?.role));
+        if (parsedUser.roles && parsedUser.roles.length > 0) {
+          const userProfiles = parsedUser.roles.map((r) =>
+            mapRoleToProfile(r.role)
+          );
+          setProfiles(userProfiles);
+        }
       } catch (error) {
         localStorage.clear();
       }
@@ -69,25 +74,30 @@ export const AuthProvider = ({ children }) => {
       );
 
       const { token: new_token, user: userData } = response.data;
-      const userRole = userData.roles[0]?.role;
+      const userRoles = userData.roles || [];
 
       localStorage.setItem("token", new_token);
       localStorage.setItem("user", JSON.stringify(userData));
 
       setToken(new_token);
       setUser(userData);
-      const userProfile = mapRoleToProfile(userRole);
-      setProfile(userProfile);
+      const userProfiles = userRoles.map((r) => mapRoleToProfile(r.role));
+      setProfiles(userProfiles);
 
       const rotasPorPerfil = {
-        aluno: "/editais",
-        professor: "/professor",
-        monitor: "/monitor",
-        coordenador: "/coordenador",
         admin: "/admin",
+        coordenador: "/coordenador",
+        professor: "/professor",
+        aluno: "/editais",
       };
 
-      navigate(rotasPorPerfil[userProfile] || "/");
+      const redirectProfile = [
+        "admin",
+        "coordenador",
+        "professor",
+        "aluno",
+      ].find((p) => userProfiles.includes(p));
+      navigate(rotasPorPerfil[redirectProfile] || "/");
     } catch (error) {
       console.error("Falha no login:", error);
       if (
@@ -106,14 +116,14 @@ export const AuthProvider = ({ children }) => {
     localStorage.removeItem("user");
     setToken(null);
     setUser(null);
-    setProfile(null);
+    setProfiles([]);
     navigate("/");
   };
 
   const authContextValue = {
     token,
     user,
-    profile,
+    profiles,
     isAuthenticated: !!token,
     loading,
     authError,

@@ -32,6 +32,8 @@ import EditarProcessoSeletivo from "../pages/EditarProcessoSeletivo.jsx";
 import NovaMonitoria from "../pages/NovaMonitoria.jsx";
 import EditarMonitoria from "../pages/EditarMonitoria.jsx";
 import VisualizarMonitoria from "../pages/VisualizarMonitoria.jsx";
+import VisualizarEdital from "../pages/VisualizarEdital.jsx";
+
 function AppRoutes() {
   const location = useLocation();
 
@@ -297,6 +299,14 @@ function AppRoutes() {
           element={
             <RotaProtegida perfilPermitido={["coordenador"]}>
               <EditarProcessoSeletivo />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/processos-seletivos/visualizar/:id"
+          element={
+            <RotaProtegida perfilPermitido={["admin", "coordenador"]}>
+              <VisualizarEdital />
             </RotaProtegida>
           }
         />

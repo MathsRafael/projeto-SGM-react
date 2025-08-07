@@ -59,7 +59,7 @@ export default function ProcessosSeletivos() {
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Gerenciar Editais</h1>
         <Button onClick={() => navigate("/processos-seletivos/novo")}>
-          Novo Edital
+          Criar Edital
         </Button>
       </div>
 
@@ -78,10 +78,16 @@ export default function ProcessosSeletivos() {
             <tr key={edital.id} className="hover:bg-gray-50">
               <td className="p-3 border-b">{edital.titulo}</td>
               <td className="p-3 border-b">
-                {new Date(edital.dataInicioInscricoes).toLocaleDateString()}
+                {new Date(edital.dataInicioInscricoes).toLocaleDateString(
+                  "pt-BR",
+                  { timeZone: "UTC" }
+                )}
               </td>
               <td className="p-3 border-b">
-                {new Date(edital.dataFimInscricoes).toLocaleDateString()}
+                {new Date(edital.dataFimInscricoes).toLocaleDateString(
+                  "pt-BR",
+                  { timeZone: "UTC" }
+                )}
               </td>
               <td className="p-3 border-b">
                 <span
@@ -95,14 +101,19 @@ export default function ProcessosSeletivos() {
                 </span>
               </td>
               <td className="p-3 border-b text-center space-x-2">
+                <Button
+                  onClick={() =>
+                    navigate(`/processos-seletivos/visualizar/${edital.id}`)
+                  }
+                >
+                  Visualizar
+                </Button>
                 {edital.status === "ABERTO" && (
-                  <Button
-                    onClick={() => handleFechar(edital.id)}
-                    color="orange"
-                  >
-                    Fechar
+                  <Button onClick={() => handleFechar(edital.id)} color="color">
+                    Fechar Inscrições
                   </Button>
                 )}
+
                 <Button
                   onClick={() =>
                     navigate(`/processos-seletivos/editar/${edital.id}`)

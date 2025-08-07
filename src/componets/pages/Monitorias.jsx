@@ -26,9 +26,7 @@ export default function Monitorias() {
   };
 
   const handleDeletar = (id) => {
-    if (
-      window.confirm("Tem certeza que deseja excluir esta vaga de monitoria?")
-    ) {
+    if (window.confirm("Tem certeza que deseja excluir esta monitoria?")) {
       monitoriaService
         .deleteMonitoria(id)
         .then(() => setMonitorias(monitorias.filter((m) => m.id !== id)))
@@ -42,9 +40,9 @@ export default function Monitorias() {
   return (
     <div className="p-6 max-w-6xl mx-auto">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold">Gerenciar Vagas de Monitoria</h1>
+        <h1 className="text-3xl font-bold">Gerenciar Monitorias</h1>
         <Button onClick={() => navigate("/monitorias/novo")}>
-          Nova Vaga de Monitoria
+          Criar Monitoria
         </Button>
       </div>
 

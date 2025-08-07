@@ -1,54 +1,43 @@
 import { useAuth } from "../AuthContext";
 import NavItem from "../navbar/NavItem.jsx";
 import ScrollContainer from "../navbar/ScrollContainer.jsx";
-
 function NavBar() {
-  const { profile } = useAuth();
+  const { profiles } = useAuth();
 
   return (
     <nav>
-      {/* Exibir item apenas para certos perfis */}
-      {profile === "monitor" && (
-        <ScrollContainer>
-          <NavItem to="/monitor" label="Monitoria" />
-        </ScrollContainer>
-      )}
-
-      {profile === "professor" && (
-        <ScrollContainer>
+      <ScrollContainer>
+        {profiles.includes("professor") && (
           <NavItem to="/professor" label="Painel Professor" />
-        </ScrollContainer>
-      )}
+        )}
 
-      {profile === "aluno" && (
-        <ScrollContainer>
-          <NavItem to="/editais" label="Editais" />
-          <NavItem to="/monitorias" label="Agenda" />
-        </ScrollContainer>
-      )}
+        {profiles.includes("aluno") && (
+          <>
+            <NavItem to="/editais" label="Editais" />
+            <NavItem to="/monitorias" label="Agenda" />
+          </>
+        )}
 
-      {profile === "admin" && (
-        <ScrollContainer>
-          <NavItem to="/admin" label="Painel Admin" />
-          <NavItem to="/instituicoes" label="Instituições" />
-          <NavItem to="/professores/coordenadores" label="Coordenadores" />
-          <NavItem to="/alunos" label="Alunos" />
-          <NavItem to="/disciplinas" label="Disciplinas" />
-          <NavItem to="/cursos" label="Cursos" />
-          <NavItem to="/professores" label="Professores" />
-        </ScrollContainer>
-      )}
+        {profiles.includes("admin") && (
+          <>
+            <NavItem to="/instituicoes" label="Instituições" />
+            <NavItem to="/professores/coordenadores" label="Coordenadores" />
+            <NavItem to="/alunos" label="Alunos" />
+            <NavItem to="/disciplinas" label="Disciplinas" />
+            <NavItem to="/cursos" label="Cursos" />
+            <NavItem to="/professores" label="Professores" />
+          </>
+        )}
 
-      {profile === "coordenador" && (
-        <ScrollContainer>
-          <NavItem to="/coordenador" label="Coordenação" />
-          <NavItem to="/alunos" label="Alunos" />
-          <NavItem to="/disciplinas" label="Disciplinas" />
-          <NavItem to="/monitorias" label="Monitorias" />
-          <NavItem to="/processos-seletivos" label="Editais" />
-          <NavItem to="/professor" label="Painel Professor" />
-        </ScrollContainer>
-      )}
+        {profiles.includes("coordenador") && (
+          <>
+            <NavItem to="/alunos" label="Alunos" />
+            <NavItem to="/disciplinas" label="Disciplinas" />
+            <NavItem to="/monitorias" label="Gerenciar Monitorias" />
+            <NavItem to="/processos-seletivos" label="Gerenciar Editais" />
+          </>
+        )}
+      </ScrollContainer>
     </nav>
   );
 }
