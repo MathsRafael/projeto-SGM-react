@@ -50,6 +50,9 @@ export default function Professores() {
     <div className="p-6 max-w-7xl mx-auto">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Gerenciar Professores</h1>
+        <Button onClick={() => navigate("/professores/novo")}>
+          Novo Professor
+        </Button>
       </div>
 
       {professores.length === 0 ? (
@@ -91,6 +94,7 @@ export default function Professores() {
                   >
                     Editar
                   </Button>
+
                   <Button onClick={() => deletarProfessor(prof.id)} color="red">
                     Excluir
                   </Button>

@@ -17,3 +17,11 @@ export const updateProfessor = (id, professorData) => {
 export const deleteProfessor = (id) => {
   return api.delete(`${API_URL}/${id}`);
 };
+
+export const createProfessor = (professorData) => {
+  return api.post(API_URL, professorData);
+};
+
+export const getMinhasMonitorias = () => {
+  return api.get(`${API_URL}/minhas-monitorias`);
+};

@@ -8,13 +8,20 @@ function NavBar() {
     <nav>
       <ScrollContainer>
         {profiles.includes("professor") && (
-          <NavItem to="/professor" label="Painel Professor" />
+          <>
+            <NavItem to="/professor" label="Painel Professor" />
+            <NavItem
+              to="/professor/minhas-monitorias"
+              label="Minhas Monitorias"
+            />
+            <NavItem to="/editais" label="Editais" />
+          </>
         )}
 
         {profiles.includes("aluno") && (
           <>
             <NavItem to="/editais" label="Editais" />
-            <NavItem to="/monitorias" label="Agenda" />
+            <NavItem to="/minhas-inscricoes" label="Minhas Inscrições" />
           </>
         )}
 

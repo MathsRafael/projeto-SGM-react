@@ -1,46 +1,36 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import * as alunoService from "../services/alunoService";
-import * as instituicaoService from "../services/instituicaoService";
+import * as professorService from "../services/professorService";
 import Button from "../form/Button.jsx";
 import Campo from "../form/Campo.jsx";
 
-export default function NovoAluno() {
+export default function NovoProfessor() {
   const navigate = useNavigate();
   const [form, setForm] = useState({
     nome: "",
-    cpf: "",
-    matricula: "",
     email: "",
     emailAcademico: "",
+    matricula: "",
+    cpf: "",
     senha: "",
-    instituicaoId: "",
   });
-  const [instituicoes, setInstituicoes] = useState([]);
   const [erro, setErro] = useState(null);
 
-  useEffect(() => {
-    instituicaoService
-      .getInstituicoes()
-      .then((res) => setInstituicoes(res.data))
-      .catch(() => setErro("Erro ao carregar instituições."));
-  }, []);
-
   const handleChange = (e) => {
-    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     setErro(null);
-    alunoService
-      .createAluno(form)
+    professorService
+      .createProfessor(form)
       .then(() => {
-        navigate("/alunos");
+        navigate("/professores");
       })
       .catch((error) => {
-        console.error("Erro ao cadastrar aluno:", error);
-        setErro("Erro ao cadastrar aluno. Verifique os dados.");
+        console.error("Erro ao criar professor:", error);
+        setErro("Não foi possível salvar o professor. Verifique os dados.");
       });
   };
 
@@ -50,7 +40,7 @@ export default function NovoAluno() {
         onSubmit={handleSubmit}
         className="border p-6 rounded w-full max-w-lg shadow-lg"
       >
-        <h2 className="text-2xl font-bold mb-4">Novo Aluno</h2>
+        <h2 className="text-2xl font-bold mb-4">Novo Professor</h2>
         {erro && <p className="text-red-500 mb-4 text-center">{erro}</p>}
 
         <Campo
@@ -98,33 +88,15 @@ export default function NovoAluno() {
           required
         />
 
-        <div className="mb-4">
-          <label className="block mb-1 text-gray-600">Instituição</label>
-          <select
-            name="instituicaoId"
-            value={form.instituicaoId}
-            onChange={handleChange}
-            className="mt-0.5 mb-3 p-[8px] border-2 border-[#ccc] w-full"
-            required
-          >
-            <option value="">Selecione uma instituição</option>
-            {instituicoes.map((inst) => (
-              <option key={inst.id} value={inst.id}>
-                {inst.nome}
-              </option>
-            ))}
-          </select>
-        </div>
-
         <div className="flex justify-center gap-2 mt-4">
           <Button
             type="button"
             color="color"
-            onClick={() => navigate("/alunos")}
+            onClick={() => navigate("/professores")}
           >
             Cancelar
           </Button>
-          <Button type="submit">Cadastrar</Button>
+          <Button type="submit">Salvar</Button>
         </div>
       </form>
     </div>

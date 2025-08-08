@@ -80,7 +80,11 @@ export default function VisualizarEdital() {
                 <td className="p-3 border-b text-center">
                   <Button
                     onClick={() =>
-                      navigate(`/monitorias/visualizar/${monitoria.id}`)
+                      navigate(`/monitorias/visualizar/${monitoria.id}`, {
+                        state: {
+                          from: `/processos-seletivos/visualizar/${edital.id}`,
+                        },
+                      })
                     }
                   >
                     Visualizar

@@ -33,6 +33,11 @@ import NovaMonitoria from "../pages/NovaMonitoria.jsx";
 import EditarMonitoria from "../pages/EditarMonitoria.jsx";
 import VisualizarMonitoria from "../pages/VisualizarMonitoria.jsx";
 import VisualizarEdital from "../pages/VisualizarEdital.jsx";
+import DetalhesEdital from "../pages/DetalhesEdital.jsx";
+import MinhasInscricoes from "../pages/MinhasInscricoes.jsx";
+import NovoAluno from "../pages/NovoAluno.jsx";
+import NovoProfessor from "../pages/NovoProfessor.jsx";
+import MinhasMonitorias from "../pages/MinhasMonitorias.jsx";
 
 function AppRoutes() {
   const location = useLocation();
@@ -273,7 +278,9 @@ function AppRoutes() {
         <Route
           path="/monitorias/visualizar/:id"
           element={
-            <RotaProtegida perfilPermitido={["coordenador"]}>
+            <RotaProtegida
+              perfilPermitido={["coordenador", "professor", "aluno"]}
+            >
               <VisualizarMonitoria />
             </RotaProtegida>
           }
@@ -307,6 +314,67 @@ function AppRoutes() {
           element={
             <RotaProtegida perfilPermitido={["admin", "coordenador"]}>
               <VisualizarEdital />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/editais"
+          element={
+            <RotaProtegida
+              perfilPermitido={["professor", "coordenador", "aluno", "admin"]}
+            >
+              <Editais />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/editais/:id"
+          element={
+            <RotaProtegida
+              perfilPermitido={["aluno", "professor", "coordenador", "admin"]}
+            >
+              <DetalhesEdital />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/minhas-inscricoes"
+          element={
+            <RotaProtegida perfilPermitido="aluno">
+              <MinhasInscricoes />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/minhas-inscricoes"
+          element={
+            <RotaProtegida perfilPermitido="aluno">
+              <MinhasInscricoes />
+            </RotaProtegida>
+          }
+        />
+
+        <Route
+          path="/alunos/novo"
+          element={
+            <RotaProtegida perfilPermitido={["admin", "coordenador"]}>
+              <NovoAluno />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/professores/novo"
+          element={
+            <RotaProtegida perfilPermitido={["admin", "coordenador"]}>
+              <NovoProfessor />
+            </RotaProtegida>
+          }
+        />
+        <Route
+          path="/professor/minhas-monitorias"
+          element={
+            <RotaProtegida perfilPermitido={["professor", "coordenador"]}>
+              <MinhasMonitorias />
             </RotaProtegida>
           }
         />

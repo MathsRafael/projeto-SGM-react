@@ -50,6 +50,7 @@ export default function Alunos() {
     <div className="p-6 max-w-6xl mx-auto">
       <div className="flex justify-between items-center mb-6">
         <h1 className="text-3xl font-bold">Gerenciar Alunos</h1>
+        <Button onClick={() => navigate("/alunos/novo")}>Novo Aluno</Button>
       </div>
 
       {alunos.length === 0 ? (

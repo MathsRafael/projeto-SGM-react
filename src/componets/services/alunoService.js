@@ -21,3 +21,11 @@ export const updateAluno = (id, alunoData) => {
 export const deleteAluno = (id) => {
   return api.delete(`${API_URL}/${id}`);
 };
+
+export const inscreverEmMonitoria = (monitoriaId) => {
+  return api.post(`/monitorias/${monitoriaId}/inscrever-se`);
+};
+
+export const getMinhasInscricoes = () => {
+  return api.get("/alunos/minhas-inscricoes");
+};
