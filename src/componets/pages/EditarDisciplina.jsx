@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// GARANTA QUE 'useParams' ESTÁ SENDO IMPORTADO AQUI
 import { useNavigate, useParams } from "react-router-dom";
 import api from "../services/api";
 import Button from "../form/Button";
@@ -34,10 +33,8 @@ export default function EditarDisciplina() {
         setForm({
           nome: disciplina.nome || "",
           cargaHoraria: disciplina.cargaHoraria || "",
-          // O nome do DTO de professor que o backend envia
-          professorId: disciplina.professorResponseDTO?.id || "",
-          // O nome do DTO de curso que o backend envia
-          cursoId: disciplina.cursoResponseDTO?.id || "",
+          professorId: String(disciplina.professorResponseDTO?.id || ""),
+          cursoId: String(disciplina.cursoResponseDTO?.id || ""),
         });
 
         setProfessores(respProf.data);
